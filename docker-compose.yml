@@ -1,0 +1,55 @@
+version: "3.9"
+
+services:
+  nginx:
+    build: .
+    container_name: reptor-nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - test
+      - beta
+      - dev
+      - staging
+      - qa
+    restart: unless-stopped
+
+  test:
+    image: nginx:alpine
+    container_name: test
+    volumes:
+      - ./html/test:/usr/share/nginx/html:ro
+
+  beta:
+    image: nginx:alpine
+    container_name: beta
+    volumes:
+      - ./html/beta:/usr/share/nginx/html:ro
+
+  dev:
+    image: nginx:alpine
+    container_name: dev
+    volumes:
+      - ./html/dev:/usr/share/nginx/html:ro
+
+  staging:
+    image: nginx:alpine
+    container_name: staging
+    volumes:
+      - ./html/staging:/usr/share/nginx/html:ro
+
+  qa:
+    image: nginx:alpine
+    container_name: qa
+    volumes:
+      - ./html/qa:/usr/share/nginx/html:roversion: "3.9"
+
+services:
+  nginx:
+    build: .
+    container_name: reptor-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    restart: unless-stopped
