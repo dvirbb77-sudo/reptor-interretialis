@@ -53,7 +53,7 @@ services:
    volumes:
      - ./html/prod:/usr/share/nginx/html:ro
 
-  wwww:
+  www:
    image: nginx:alpine
    container_name: www
    volumes:
