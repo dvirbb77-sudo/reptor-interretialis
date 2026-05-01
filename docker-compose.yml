@@ -9,8 +9,11 @@ services:
     depends_on:
       - test
       - beta
+      - version2
       - dev
       - staging
+      - prod
+      - www
       - qa
     restart: unless-stopped
 
@@ -26,6 +29,12 @@ services:
     volumes:
       - ./html/beta:/usr/share/nginx/html:ro
 
+  version2:
+    image: nginx:alpine
+    container_name: version2
+    volumes:
+     - ./html/version2:/usr/share/nginx/html:ro
+
   dev:
     image: nginx:alpine
     container_name: dev
@@ -38,18 +47,20 @@ services:
     volumes:
       - ./html/staging:/usr/share/nginx/html:ro
 
+  prod:
+   image: nginx:alpine
+   container_name: prod
+   volumes:
+     - ./html/prod:/usr/share/nginx/html:ro
+
+  wwww:
+   image: nginx:alpine
+   container_name: www
+   volumes:
+    - ./html/www:/usr/share/nginx/html:ro
+
   qa:
     image: nginx:alpine
     container_name: qa
     volumes:
-      - ./html/qa:/usr/share/nginx/html:roversion: "3.9"
-
-services:
-  nginx:
-    build: .
-    container_name: reptor-nginx
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-    restart: unless-stopped
+      - ./html/qa:/usr/share/nginx/html:ro
