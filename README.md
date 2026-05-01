@@ -57,7 +57,7 @@ You will be prompted for a domain (default: `mydomain.test`).
 ### 2. Run the service
 
 ```bash
-docker compose up --build
+docker compose up --build -d
 ```
 
 ---
@@ -78,11 +78,7 @@ You will likely receive:
 502 Bad Gateway
 ```
 
-This is **expected**.
-
-### Why?
-
-The NGINX container is configured to proxy traffic to subdomains like:
+This is expected, because the NGINX container is configured to proxy traffic to subdomains like:
 
 * `test.mydomain.test`
 * `beta.mydomain.test`
@@ -99,7 +95,7 @@ This project demonstrates:
 
 ---
 
-## 🔍 Verification
+## Verification
 
 Check NGINX logs:
 
@@ -113,7 +109,7 @@ You should see errors indicating failed upstream resolution, which confirms that
 
 ## Notes
 
-* Uses `.test` domain to avoid conflicts with real DNS
+* Uses `.test` domain to avoid conflicts with real DNS (mydomain.com)
 * Includes config validation using `nginx -t` inside a container
 * Designed for learning and demonstration purposes
 
