@@ -26,7 +26,9 @@ for sub in "${SUBDOMAINS[@]}"; do
 done
 
 mkdir -p nginx
-
+# looks great - you got the idea of template. the execution is somewhat "dirty"
+# better to have config.tmpl file that has definitions and update/change config with awk sed and grep
+# or to write full config to file (incase you do not want tmpl file in project) and then use awk sed and grep to updat it.
 cat > nginx/nginx.conf <<EOF
 worker_processes auto;
 
@@ -64,7 +66,7 @@ echo "Validating nginx configuration..."
 if docker run --rm -v "$(pwd)/nginx/nginx.conf:/etc/nginx/nginx.conf:ro" nginx:alpine nginx -t; then
     echo "Nginx config is valid"
 else
-    echo "Nginx config validation failed"
+    echo "Nginx config validation failed" # good, try to add the output of the error to debug purposes
     exit 1
 fi
 
