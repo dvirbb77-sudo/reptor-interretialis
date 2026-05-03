@@ -14,7 +14,8 @@ services:
       - www
       - qa
     restart: unless-stopped
-
+# reptor-interretialis means web-crawler in latin, aka spiderman.
+# great way to test this !!!
   test:
     image: nginx:alpine
     container_name: test
